@@ -1,0 +1,120 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet10.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet11.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet24.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet19.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet2.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet3.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet4.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet8.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/Background.tscn" type="PackedScene" id=11]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "Run",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "Won",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 20.0
+height = 14.0
+
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+moveSpeed = 300
+jumpSpeed = 600
+dampSpeed = 20
+
+[node name="Sprite" type="AnimatedSprite" parent="." index="0"]
+
+frames = SubResource( 1 )
+animation = "Idle"
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 0, 7 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Camera2D" type="Camera2D" parent="." index="2"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_left = 0
+limit_top = 0
+limit_right = 1280
+limit_bottom = 700
+limit_smoothed = true
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+smoothing_enabled = true
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+_sections_unfolded = [ "Limit" ]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="3"]
+
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+scroll_offset = Vector2( 0, 0 )
+scroll_base_offset = Vector2( 0, 0 )
+scroll_base_scale = Vector2( 1, 1 )
+scroll_limit_begin = Vector2( 0, 0 )
+scroll_limit_end = Vector2( 0, 0 )
+scroll_ignore_camera_zoom = true
+
+[node name="Background" parent="ParallaxBackground" index="0" instance=ExtResource( 11 )]
+
+
