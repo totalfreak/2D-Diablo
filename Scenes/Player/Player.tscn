@@ -38,7 +38,7 @@ animations = [ {
 "frames": [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "Won",
-"speed": 5.0
+"speed": 3.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]

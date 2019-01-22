@@ -2,7 +2,7 @@ extends Area2D
 
 export(String, FILE, "*.tscn") var world_scene
 
-export var teleportDelay = 0.5
+export var teleportDelay = 1.5
 var t = Timer.new()
 
 var startedTeleport = false

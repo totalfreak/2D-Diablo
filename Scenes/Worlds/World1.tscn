@@ -41,9 +41,10 @@ __meta__ = {
 
 position = Vector2( 560, 595 )
 world_scene = "res://Scenes/Worlds/World2.tscn"
+teleportDelay = 1.5
 
 [node name="Enemy" parent="." index="3" instance=ExtResource( 4 )]
 
-position = Vector2( 351, 424 )
+position = Vector2( 351, 616 )
 
 
