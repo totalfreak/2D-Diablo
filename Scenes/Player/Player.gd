@@ -40,12 +40,13 @@ func _physics_process(delta):
 	
 	
 	
-	if not hasWon and not dead and not takingDamage:
+	if not hasWon and not dead and not takingDamage and not attacking:
 		# Handling input
 		_Process_Input(delta)
 		
 	elif hasWon:
 		motion.x = 0
+		$AnimationPlayer.play("Won")
 		$Sprite.play("Won")
 	
 	#Jumping when on floor
@@ -63,11 +64,15 @@ func _Process_Input(var delta):
 		# If on floor, play run anim else do either fall or jump anim
 		if is_on_floor():
 			$Sprite.play("Run")
+			if not $AnimationPlayer.is_playing():
+				$AnimationPlayer.play("Run")
 		else:
 			if motion.y < 0:
 				$Sprite.play("Jump")
+				$AnimationPlayer.play("Jump")
 			else:
 				$Sprite.play("Fall")
+				$AnimationPlayer.play("Fall")
 		motion.x = lerp(motion.x, moveSpeed, dampSpeed * delta)
 	elif Input.is_action_pressed("ui_left"):
 		$Sprite.flip_h = true
@@ -75,11 +80,15 @@ func _Process_Input(var delta):
 		# If on floor, play run anim else do either fall or jump anim
 		if is_on_floor():
 			$Sprite.play("Run")
+			if not $AnimationPlayer.is_playing():
+				$AnimationPlayer.play("Run")
 		else:
 			if motion.y < 0:
 				$Sprite.play("Jump")
+				$AnimationPlayer.play("Jump")
 			else:
 				$Sprite.play("Fall")
+				$AnimationPlayer.play("Fall")
 		motion.x = lerp(motion.x, -moveSpeed, dampSpeed * delta)
 	elif not is_on_floor():
 		#Slow down in air if no direction is pressed
@@ -88,11 +97,14 @@ func _Process_Input(var delta):
 		#Play jump and fall animations
 		if motion.y < 0:
 			$Sprite.play("Jump")
+			$AnimationPlayer.play("Jump")
 		else:
 			$Sprite.play("Fall")
+			$AnimationPlayer.play("Fall")
 	else:
 		motion.x = lerp(motion.x, 0, dampSpeed * delta)
 		$Sprite.play("Idle")
+		$AnimationPlayer.play("Idle")
 	
 	if Input.is_action_just_pressed("Attack"):
 		_Attack()
@@ -101,7 +113,9 @@ func _Process_Input(var delta):
 func _Attack():
 	if not attacking:
 		attacking = true
-		$WeaponContainer/WeaponPoint/Sword/AnimationPlayer.play("Attack")
+		$Sprite.play("Attack")
+		$AnimationPlayer.play("Attack")
+		#$WeaponContainer/WeaponPoint/Sword/AnimationPlayer.play("Attack")
 		attackTimer.start()
 		pass
 
@@ -113,8 +127,8 @@ func _Get_Attacked(var damage, var direction):
 	$Sprite.play("Get_Hit")
 	health-=damage
 	var text = damageText.instance()
+	text.get_node("AnimationPlayer").current_animation = "Appear"
 	add_child(text)
-	text
 	if health <= 0 and not dead:
 		_Die()
 	print(str(damage) + " " + direction)

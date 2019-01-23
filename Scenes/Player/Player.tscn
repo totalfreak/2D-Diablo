@@ -1,16 +1,208 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet10.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet11.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet1.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet2.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet22.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet3.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet4.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet8.png" type="Texture" id=9]
-[ext_resource path="res://Scenes/Background.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Weapons/Swords/Sword.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger15.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger16.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger17.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger18.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger3.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger11.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger12.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger13.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger5.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger6.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger9.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger10.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger7.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger8.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/Background.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Weapons/Swords/Sword.tscn" type="PackedScene" id=17]
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "Attack"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponContainer/WeaponPoint:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.1, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -4, 15 ), Vector2( -4.44392, 20.3946 ), Vector2( -4.23458, 22.0693 ), Vector2( -7.72272, 22.1514 ), Vector2( -4, 15 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WeaponContainer/WeaponPoint:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.1, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 69.1102, 69.1102, 98.131, 0.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+
+resource_name = "Fall"
+length = 0.1
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponContainer/WeaponPoint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -10, 20 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WeaponContainer/WeaponPoint:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+
+resource_name = "Idle"
+length = 0.1
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponContainer/WeaponPoint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -12, 22 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WeaponContainer/WeaponPoint:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+
+resource_name = "Jump"
+length = 0.1
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponContainer/WeaponPoint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -11, 25 ), Vector2( -12, 20 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WeaponContainer/WeaponPoint:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 4.1962, 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+
+resource_name = "Run"
+length = 0.3
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponContainer/WeaponPoint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.1, 0.2, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -8, 20 ), Vector2( -10, 22 ), Vector2( -10, 21.7907 ), Vector2( -12.4356, 21.884 ), Vector2( -10.3421, 19.6859 ), Vector2( -12.0169, 21.7793 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WeaponContainer/WeaponPoint:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.1, 0.2, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 7.24058, 1.85901, -7.14412, -1.70607, 2.06557 ]
+}
+
+[sub_resource type="Animation" id=8]
+
+resource_name = "Won"
+length = 0.3
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponContainer/WeaponPoint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -11, 24 ), Vector2( -12, 20 ), Vector2( -10, 20 ), Vector2( -8, 24 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WeaponContainer/WeaponPoint:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0 ]
+}
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -21,38 +213,43 @@ height = 19.8338
 [sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "Run",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 3.0
 }, {
-"frames": [ ExtResource( 5 ) ],
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
+"name": "Attack",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": false,
 "name": "Jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 12 ) ],
 "loop": true,
 "name": "Get_Hit",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 14 ) ],
 "loop": true,
 "name": "Fall",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 5 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 15 ) ],
 "loop": true,
 "name": "Won",
 "speed": 3.0
 } ]
 
-[node name="Player" type="KinematicBody2D" groups=[
+[node name="Player" type="KinematicBody2D" index="0" groups=[
 "Player",
 ]]
 
@@ -70,19 +267,37 @@ jumpSpeed = 600
 dampSpeed = 20
 knockbackDelay = 0.5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
 
-position = Vector2( 1, 4 )
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 0
+playback_default_blend_time = 0.0
+playback_speed = 0.5
+anims/Attack = SubResource( 3 )
+anims/Fall = SubResource( 6 )
+anims/Idle = SubResource( 4 )
+anims/Jump = SubResource( 7 )
+anims/Run = SubResource( 5 )
+anims/Won = SubResource( 8 )
+blend_times = [  ]
+_sections_unfolded = [ "Playback Options" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 1, 2 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Sprite" type="AnimatedSprite" parent="." index="1"]
+[node name="Sprite" type="AnimatedSprite" parent="." index="2"]
 
+scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
-animation = "Idle"
+animation = "Won"
+frame = 3
 _sections_unfolded = [ "Transform" ]
 
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
+[node name="Camera2D" type="Camera2D" parent="." index="3"]
 
 anchor_mode = 1
 rotating = false
@@ -108,7 +323,7 @@ editor_draw_limits = false
 editor_draw_drag_margin = false
 _sections_unfolded = [ "Limit", "Smoothing" ]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="3"]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="4"]
 
 editor/display_folded = true
 layer = -1
@@ -124,32 +339,31 @@ scroll_limit_end = Vector2( 0, 0 )
 scroll_ignore_camera_zoom = false
 _sections_unfolded = [ "Scroll" ]
 
-[node name="Background" parent="ParallaxBackground" index="0" instance=ExtResource( 10 )]
+[node name="Background" parent="ParallaxBackground" index="0" instance=ExtResource( 16 )]
 
-[node name="AttackTimer" type="Timer" parent="." index="4"]
+[node name="AttackTimer" type="Timer" parent="." index="5"]
 
 process_mode = 0
 wait_time = 0.6
 one_shot = true
 autostart = false
 
-[node name="TakeDamageTimer" type="Timer" parent="." index="5"]
+[node name="TakeDamageTimer" type="Timer" parent="." index="6"]
 
 process_mode = 0
 wait_time = 0.5
 one_shot = false
 autostart = false
 
-[node name="WeaponContainer" type="Node2D" parent="." index="6"]
+[node name="WeaponContainer" type="Node2D" parent="." index="7"]
 
-editor/display_folded = true
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="WeaponPoint" type="Position2D" parent="WeaponContainer" index="0"]
 
-position = Vector2( 21, 13 )
+position = Vector2( -8, 24 )
 
-[node name="Sword" parent="WeaponContainer/WeaponPoint" index="0" instance=ExtResource( 11 )]
+[node name="Sword" parent="WeaponContainer/WeaponPoint" index="0" instance=ExtResource( 17 )]
 
 position = Vector2( 0, -21 )
 

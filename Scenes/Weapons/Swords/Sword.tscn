@@ -87,4 +87,6 @@ audio_bus_name = "Master"
 position = Vector2( 0, -4 )
 shape = SubResource( 1 )
 
+[connection signal="body_entered" from="Sprite/Collider" to="." method="_on_Collider_body_entered"]
+
 

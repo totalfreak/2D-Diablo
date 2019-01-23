@@ -1,14 +1,40 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Run",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Attack",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Get_Hit",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 32, 32 )
 
-[node name="Enemy" type="KinematicBody2D" index="0"]
+[node name="Enemy" type="KinematicBody2D" groups=[
+"Enemy",
+]]
 
 scale = Vector2( 0.75, 0.75 )
 input_pickable = false
@@ -18,16 +44,18 @@ collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 moveSpeed = 50
+health = 10
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="Sprite" type="AnimatedSprite" parent="." index="0"]
 
 modulate = Color( 1, 0, 0, 1 )
-texture = ExtResource( 2 )
+frames = SubResource( 1 )
+animation = "Idle"
 _sections_unfolded = [ "Visibility" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="surfaceRayLeft" type="RayCast2D" parent="." index="2"]
 
@@ -70,6 +98,15 @@ wait_time = 2.0
 one_shot = false
 autostart = false
 
+[node name="TakeDamageTimer" type="Timer" parent="." index="7"]
+
+process_mode = 0
+wait_time = 0.5
+one_shot = false
+autostart = false
+
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+
+[connection signal="timeout" from="TakeDamageTimer" to="." method="_on_AttackTimer_timeout"]
 
 
