@@ -58,7 +58,7 @@ flag_rotate_y = false
 flag_disable_z = true
 spread = 180.0
 flatness = 0.0
-gravity = Vector3( 0, 5, 0 )
+gravity = Vector3( 0, 0, 0 )
 initial_velocity = 15.0
 initial_velocity_random = 0.31
 angular_velocity = 100.0
@@ -85,7 +85,7 @@ anim_speed_random = 0.0
 anim_offset = 0.0
 anim_offset_random = 0.0
 anim_loop = false
-_sections_unfolded = [ "Color", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Orbit Velocity", "Radial Accel", "Scale", "Spread", "Trail" ]
+_sections_unfolded = [ "Color", "Emission Shape", "Flags", "Gravity", "Orbit Velocity", "Radial Accel", "Scale", "Spread", "Trail" ]
 
 [node name="Portal" type="Area2D"]
 
@@ -106,7 +106,6 @@ teleportDelay = 1.0
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
 visible = false
-scale = Vector2( 1, 1 )
 z_index = -1
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform", "Z Index" ]
@@ -125,7 +124,7 @@ emitting = true
 amount = 1000
 lifetime = 2.0
 one_shot = false
-preprocess = 1.0
+preprocess = 5.0
 speed_scale = 1.0
 explosiveness = 0.0
 randomness = 0.0

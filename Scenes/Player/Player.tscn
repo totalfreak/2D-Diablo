@@ -1,43 +1,44 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet1.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet10.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet11.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet22.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet2.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet10.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet11.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet2.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet22.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet3.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet4.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Player/Tiles exported/adventurer_tilesheet8.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Background.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Weapons/Swords/Sword.tscn" type="PackedScene" id=11]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 20.0
 height = 19.8338
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 3.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "Run",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 3.0
+}, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "Get_Hit",
+"name": "Jump",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "Jump",
+"name": "Get_Hit",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ) ],
@@ -45,13 +46,13 @@ animations = [ {
 "name": "Fall",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 5 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "Won",
 "speed": 3.0
 } ]
 
-[node name="Player" type="KinematicBody2D" index="0" groups=[
+[node name="Player" type="KinematicBody2D" groups=[
 "Player",
 ]]
 
@@ -72,12 +73,12 @@ knockbackDelay = 0.5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
 position = Vector2( 1, 4 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="AnimatedSprite" parent="." index="1"]
 
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 animation = "Idle"
 _sections_unfolded = [ "Transform" ]
 
@@ -120,15 +121,16 @@ scroll_base_offset = Vector2( 0, 0 )
 scroll_base_scale = Vector2( 1, 1 )
 scroll_limit_begin = Vector2( 0, 0 )
 scroll_limit_end = Vector2( 0, 0 )
-scroll_ignore_camera_zoom = true
+scroll_ignore_camera_zoom = false
+_sections_unfolded = [ "Scroll" ]
 
 [node name="Background" parent="ParallaxBackground" index="0" instance=ExtResource( 10 )]
 
 [node name="AttackTimer" type="Timer" parent="." index="4"]
 
 process_mode = 0
-wait_time = 1.0
-one_shot = false
+wait_time = 0.6
+one_shot = true
 autostart = false
 
 [node name="TakeDamageTimer" type="Timer" parent="." index="5"]
@@ -137,5 +139,18 @@ process_mode = 0
 wait_time = 0.5
 one_shot = false
 autostart = false
+
+[node name="WeaponContainer" type="Node2D" parent="." index="6"]
+
+editor/display_folded = true
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="WeaponPoint" type="Position2D" parent="WeaponContainer" index="0"]
+
+position = Vector2( 21, 13 )
+
+[node name="Sword" parent="WeaponContainer/WeaponPoint" index="0" instance=ExtResource( 11 )]
+
+position = Vector2( 0, -21 )
 
 

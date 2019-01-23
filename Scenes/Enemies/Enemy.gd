@@ -39,7 +39,7 @@ func _physics_process(delta):
 				leftPlayerRay.enabled = true
 				motion.x = -moveSpeed
 				#If player is in attack range
-				if playerBools[0] and leftPlayerRay.get_collider().get_groups()[0] == "Player":
+				if playerBools[0] and leftPlayerRay.get_collider().get_groups().has("Player"):
 					print(leftPlayerRay.get_collider().get_groups())
 					attacking = true
 					player._Get_Attacked(10, "left")
@@ -50,7 +50,7 @@ func _physics_process(delta):
 				leftPlayerRay.enabled = false
 				motion.x = moveSpeed
 				#If player is in attack range
-				if playerBools[1] and rightPlayerRay.get_collider().get_groups()[0] == "Player":
+				if playerBools[1] and rightPlayerRay.get_collider().get_groups().has("Player"):
 					print(rightPlayerRay.get_collider().get_groups())
 					attacking = true
 					player._Get_Attacked(10, "right")
