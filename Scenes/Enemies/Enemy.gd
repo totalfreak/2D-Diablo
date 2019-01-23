@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 export var moveSpeed = 100
-export var health = 10
-
+export var health = 10.0
+onready var ogHealth = health
 onready var leftSurfaceRay = get_node("surfaceRayLeft")
 onready var rightSurfaceRay = get_node("surfaceRayRight")
 onready var leftPlayerRay = get_node("playerRayLeft")
@@ -10,6 +10,7 @@ onready var rightPlayerRay = get_node("playerRayRight")
 onready var player = get_tree().get_nodes_in_group("Player")[0]
 onready var attackTimer = get_node("AttackTimer")
 onready var takeDamageTimer = get_node("TakeDamageTimer")
+onready var deathParticle = preload("res://Scenes/FX/DeathParticles.tscn")
 
 onready var damageText = preload("res://Scenes/UI/DamageText.tscn")
 
@@ -30,6 +31,7 @@ func _ready():
 	rightSurfaceRay.add_exception(get_tree().get_nodes_in_group("Player")[0])
 	leftPlayerRay.add_exception(get_tree().get_nodes_in_group("Solids")[0])
 	rightPlayerRay.add_exception(get_tree().get_nodes_in_group("Solids")[0])
+	takeDamageTimer.connect("timeout", self, "_Stop_Taking_Damage")
 	pass
 
 func _physics_process(delta):
@@ -47,7 +49,7 @@ func _physics_process(delta):
 				leftPlayerRay.enabled = true
 				motion.x = -moveSpeed
 				#If player is in attack range
-				if playerBools[0] and leftPlayerRay.get_collider().get_groups().has("Player"):
+				if playerBools[0] and leftPlayerRay.get_collider().get_groups().has("Player") and not takingDamage and not attacking:
 					print(leftPlayerRay.get_collider().get_groups())
 					attacking = true
 					player._Get_Attacked(10, "left")
@@ -58,7 +60,7 @@ func _physics_process(delta):
 				leftPlayerRay.enabled = false
 				motion.x = moveSpeed
 				#If player is in attack range
-				if playerBools[1] and rightPlayerRay.get_collider().get_groups().has("Player"):
+				if playerBools[1] and rightPlayerRay.get_collider().get_groups().has("Player") and not takingDamage and not attacking:
 					print(rightPlayerRay.get_collider().get_groups())
 					attacking = true
 					player._Get_Attacked(10, "right")
@@ -84,18 +86,23 @@ func _physics_process(delta):
 
 
 func _Get_Attacked(var damage):
-	if not takingDamage:
+	if not takingDamage and not dead:
 		move_and_slide(Vector2(0,0), Vector2(0, -1))
 		takingDamage = true
 		takeDamageTimer.stop()
 		takeDamageTimer.start()
 		$Sprite.play("Get_Hit")
 		health-=damage
+		$Bars/HealthBar.rect_scale.x = health / ogHealth
+		$Bars/HealthText.text = str(health)
 		var text = damageText.instance()
+		text.get_node("Control/Text").text = str(damage)
 		text.get_node("AnimationPlayer").play("Appear")
 		add_child(text)
+		
 		if health <= 0 and not dead:
 			_Die()
+		
 		print(str(damage) + " ")
 
 func _on_AttackTimer_timeout():
@@ -107,5 +114,8 @@ func _Stop_Taking_Damage():
 	takeDamageTimer.stop()
 
 func _Die():
+	print("Died")
 	dead = true
+	var particle = deathParticle.instance()
+	add_child(particle)
 	pass
