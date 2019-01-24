@@ -45,6 +45,8 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 moveSpeed = 50
 health = 10.0
+followRange = 350
+attackRange = 50
 
 [node name="Sprite" type="AnimatedSprite" parent="." index="0"]
 

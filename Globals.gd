@@ -2,6 +2,7 @@ extends Node
 
 var health = 100.0
 var maxHealth
+var coins = 0
 
 func _ready():
 	

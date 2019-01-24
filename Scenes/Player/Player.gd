@@ -30,7 +30,9 @@ var knockbacked = false
 export var knockbackDelay = 0.5
 
 func _ready():
+	# Getting the health from globals
 	health = Globals._Get_Health()
+	# Setting globals max health if not set
 	if not Globals._Get_Max_Health():
 		Globals._Set_Max_Health(health)
 	maxHealth = Globals._Get_Max_Health()
@@ -148,7 +150,7 @@ func _Attack():
 		attackTimer.start()
 		pass
 
-func _Get_Attacked(var damage, var direction):
+func _Get_Attacked(var damage):
 	if not takingDamage and not dead:
 		move_and_slide(Vector2(0,0), UP_VECTOR)
 		takingDamage = true
@@ -162,7 +164,6 @@ func _Get_Attacked(var damage, var direction):
 		if health <= 0 and not dead:
 			_Die()
 		Globals._Set_Health(health)
-		print(str(damage) + " " + direction)
 
 func _Stop_Dodging():
 	dodging = false

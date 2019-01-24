@@ -220,8 +220,8 @@ tracks/1/keys = {
 [sub_resource type="CapsuleShape2D" id=7]
 
 custom_solver_bias = 0.0
-radius = 16.0
-height = 19.8338
+radius = 10.0
+height = 10.0
 
 [sub_resource type="SpriteFrames" id=8]
 
@@ -272,8 +272,8 @@ animations = [ {
 ]]
 
 input_pickable = false
-collision_layer = 1
-collision_mask = 1
+collision_layer = 524293
+collision_mask = 524293
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision" ]
@@ -303,13 +303,13 @@ _sections_unfolded = [ "Playback Options" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( 1, 6 )
+position = Vector2( 0, 5 )
 shape = SubResource( 7 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="AnimatedSprite" parent="." index="2"]
 
-scale = Vector2( 2, 2 )
+scale = Vector2( 1.25, 1.25 )
 frames = SubResource( 8 )
 animation = "Won"
 frame = 3
@@ -321,16 +321,16 @@ z_index = 4
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 0.5, 0.5 )
-limit_left = 0
-limit_top = 0
-limit_right = 1280
-limit_bottom = 700
+zoom = Vector2( 0.9, 0.9 )
+limit_left = -1000000
+limit_top = -1000000
+limit_right = 1000000
+limit_bottom = 1000000
 limit_smoothed = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 smoothing_enabled = true
-smoothing_speed = 3.0
+smoothing_speed = 8.0
 offset_v = 0.0
 offset_h = 0.0
 drag_margin_left = 0.2
@@ -358,6 +358,8 @@ scroll_ignore_camera_zoom = false
 _sections_unfolded = [ "Scroll" ]
 
 [node name="Background" parent="ParallaxBackground" index="0" instance=ExtResource( 17 )]
+
+modulate = Color( 1, 0.716339, 0.441406, 1 )
 
 [node name="AttackTimer" type="Timer" parent="." index="5"]
 
@@ -389,6 +391,7 @@ autostart = false
 
 [node name="WeaponContainer" type="Node2D" parent="." index="9"]
 
+scale = Vector2( 0.65, 0.65 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="WeaponPoint" type="Position2D" parent="WeaponContainer" index="0"]
@@ -405,6 +408,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="DodgeParticlePoint" type="Position2D" parent="DodgeParticleContainer" index="0"]
 
-position = Vector2( -10, 29 )
+position = Vector2( -4, 15 )
+_sections_unfolded = [ "Transform" ]
 
 
