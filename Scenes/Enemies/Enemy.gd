@@ -119,6 +119,8 @@ func Follow():
 		#Move right
 		elif rayBools[1] and not Is_Player_Left():
 			motion.x = moveSpeed
+		else:
+			motion.x = 0
 		if not Is_Player_In_Follow_Range():
 			following = false
 			_Change_State("patrolling")
