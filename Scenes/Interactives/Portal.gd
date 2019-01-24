@@ -23,4 +23,4 @@ func _on_Portal_body_entered(body):
 
 func _ChangeWorld():
 	t.queue_free()
-	get_tree().change_scene(world_scene)
+	Globals._Change_Scene(world_scene)

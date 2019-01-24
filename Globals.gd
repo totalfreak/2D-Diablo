@@ -21,6 +21,9 @@ func _Set_Health(var newHealth):
 func _Get_Health():
 	return health
 
+func _Change_Scene(var newScene):
+	get_tree().change_scene(newScene)
+
 func _Update_Health_UI():
 	get_tree().get_root().get_node("World/HUD/HealthBar").rect_scale.x = health / maxHealth
 	get_tree().get_root().get_node("World/HUD/HealthText").text = "HP: " + str(health)
