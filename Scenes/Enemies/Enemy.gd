@@ -8,6 +8,8 @@ onready var leftSurfaceRay = get_node("surfaceRayLeft")
 onready var rightSurfaceRay = get_node("surfaceRayRight")
 onready var leftPlayerRay = get_node("playerRayLeft")
 onready var rightPlayerRay = get_node("playerRayRight")
+onready var playerRay = get_node("playerRay")
+onready var playerRayLine = get_node("playerRayLine")
 onready var player = get_tree().get_nodes_in_group("Player")[0]
 onready var attackTimer = get_node("AttackTimer")
 onready var takeDamageTimer = get_node("TakeDamageTimer")
@@ -23,6 +25,7 @@ var attacking = false
 var following = false
 export var followRange = 350
 export var attackRange = 50
+var playerRayHitting = false
 
 var takingDamage = false
 var dead = false
@@ -40,6 +43,7 @@ func _ready():
 	leftSurfaceRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
 	rightSurfaceRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
 	leftPlayerRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
+	playerRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
 	rightPlayerRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
 	takeDamageTimer.connect("timeout", self, "_Stop_Taking_Damage")
 	pass
@@ -48,6 +52,8 @@ func _physics_process(delta):
 	#Save status of rays
 	rayBools[0] = leftSurfaceRay.is_colliding()
 	rayBools[1] = rightSurfaceRay.is_colliding()
+	if player:
+		playerRay.set_cast_to((player.get_global_position() - self.get_global_position()).normalized() * (followRange / 10))
 	playerBools[0] = leftPlayerRay.is_colliding()
 	playerBools[1] = rightPlayerRay.is_colliding()
 	
@@ -84,20 +90,14 @@ func Idle():
 
 func Patrol():
 	#If player is in attack range
-	if playerBools[0] and leftPlayerRay.get_collider().get_groups().has("Player") and not takingDamage and not attacking and not following and not dead:
+	if playerRay.is_colliding() and playerRay.get_collider().get_groups().has("Player") and not takingDamage and not attacking and not following and not dead:
 		_Change_State("following")
+		print("yay")
 		following = true
-		print(leftPlayerRay.get_collider().get_groups())
-	elif playerBools[1] and rightPlayerRay.get_collider().get_groups().has("Player") and not takingDamage and not attacking and not following and not dead:
-		_Change_State("following")
-		following = true
-		print(rightPlayerRay.get_collider().get_groups())
 	elif not attacking and not dead and not following:
-		
 		#Move left
 		if not movingRight and rayBools[0]:
 			motion.x = -moveSpeed
-			
 		#Move right
 		elif movingRight and rayBools[1]:
 			motion.x = moveSpeed
@@ -128,7 +128,7 @@ func Follow():
 
 func Is_Player_Left():
 	if player:
-		if player.get_global_position().x > self.get_global_position().x:
+		if playerRay.cast_to.x > 0:
 			$Sprite.flip_h = false
 			return false
 		else:

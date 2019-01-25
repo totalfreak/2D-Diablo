@@ -96,10 +96,11 @@ func _Process_Input(var delta):
 		elif motion.y > 0 and not attacking and not dodging:
 			$Sprite.play("Fall")
 			$AnimationPlayer.play("Fall")
-	elif not attacking and not dodging:
+	elif not dodging:
 		motion.x = lerp(motion.x, 0, dampSpeed * delta)
-		$Sprite.play("Idle")
-		$AnimationPlayer.play("Idle")
+		if not attacking:
+			$Sprite.play("Idle")
+			$AnimationPlayer.play("Idle")
 	
 	if Input.is_action_just_pressed("dodge") and not dodging and canDodge:
 		_Dodge(delta)
