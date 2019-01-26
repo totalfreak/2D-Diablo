@@ -44,6 +44,12 @@ func _ready():
 	rightSurfaceRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
 	leftPlayerRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
 	playerRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
+	randomize()
+	playerRayLine.default_color = Color(rand_range(0.0, 1.0), rand_range(0.0, 1.0), rand_range(0.0, 1.0), 0.5)
+	self.remove_child(playerRayLine)
+	self.remove_child(playerRay)
+	get_tree().get_root().get_node("World").call_deferred("add_child", playerRay)
+	get_tree().get_root().get_node("World").call_deferred("add_child", playerRayLine)
 	rightPlayerRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
 	takeDamageTimer.connect("timeout", self, "_Stop_Taking_Damage")
 	pass
@@ -53,7 +59,11 @@ func _physics_process(delta):
 	rayBools[0] = leftSurfaceRay.is_colliding()
 	rayBools[1] = rightSurfaceRay.is_colliding()
 	if player:
+		playerRay.position.x = self.get_global_position().x
+		playerRay.position.y = self.get_global_position().y
 		playerRay.set_cast_to((player.get_global_position() - self.get_global_position()).normalized() * (followRange / 10))
+		playerRayLine.set_point_position(0, self.get_global_position() + playerRay.cast_to)
+		playerRayLine.set_point_position(1, self.get_global_position())
 	playerBools[0] = leftPlayerRay.is_colliding()
 	playerBools[1] = rightPlayerRay.is_colliding()
 	
