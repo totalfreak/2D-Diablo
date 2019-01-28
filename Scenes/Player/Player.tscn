@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player/Ranger/Ranger3.png" type="Texture" id=2]
@@ -18,6 +18,8 @@
 [ext_resource path="res://Sprites/Player/Ranger/Ranger14.png" type="Texture" id=16]
 [ext_resource path="res://Scenes/UI/Background.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Weapons/Swords/Sword.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/SFX/HitSound.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Sounds/Pickup_Coin.wav" type="AudioStream" id=20]
 
 [sub_resource type="Animation" id=1]
 
@@ -267,7 +269,12 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Player" type="KinematicBody2D" groups=[
+[sub_resource type="AudioStreamRandomPitch" id=9]
+
+audio_stream = ExtResource( 20 )
+random_pitch = 1.2
+
+[node name="Player" type="KinematicBody2D" index="0" groups=[
 "Player",
 ]]
 
@@ -421,11 +428,24 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="JumpParticleContainer" type="Node2D" parent="." index="8"]
 
+editor/display_folded = true
 _sections_unfolded = [ "Transform" ]
 
 [node name="JumpParticlePoint" type="Position2D" parent="JumpParticleContainer" index="0"]
 
 position = Vector2( 0, 19 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="HitSound" parent="." index="9" instance=ExtResource( 19 )]
+
+[node name="GoldSound" type="AudioStreamPlayer" parent="." index="10"]
+
+stream = SubResource( 9 )
+volume_db = -13.43
+pitch_scale = 1.1
+autoplay = false
+mix_target = 0
+bus = "Master"
+_sections_unfolded = [ "Pause" ]
 
 

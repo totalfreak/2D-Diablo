@@ -2,11 +2,28 @@
 
 [ext_resource path="res://Scenes/Loot/Loot Sprayer.gd" type="Script" id=1]
 
-[node name="Loot Sprayer" type="Node2D"]
+[node name="Loot Sprayer" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
-sprayForce = 150.0
+sprayForce = 100.0
 
 [node name="SprayOrigin" type="Position2D" parent="." index="0"]
+
+[node name="SprayDirections" type="Node2D" parent="." index="1"]
+
+[node name="Position2D" type="Position2D" parent="SprayDirections" index="0"]
+
+position = Vector2( -10, -10 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Position2D2" type="Position2D" parent="SprayDirections" index="1"]
+
+position = Vector2( 0, -10 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Position2D3" type="Position2D" parent="SprayDirections" index="2"]
+
+position = Vector2( 10, -10 )
+_sections_unfolded = [ "Transform" ]
 
 

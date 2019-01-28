@@ -4,6 +4,12 @@ var health = 100.0
 var maxHealth
 var gold = 0
 const GRAVITY = 20
+
+onready var deathParticle = preload("res://Scenes/FX/DeathParticles.tscn")
+onready var goldParticle = preload("res://Scenes/FX/GoldParticle.tscn")
+onready var lootSprayer = preload("res://Scenes/Loot/Loot Sprayer.tscn")
+
+
 func _ready():
 	
 	pass
@@ -45,3 +51,20 @@ func _Update_Health_UI():
 
 func _Update_Gold_UI():
 	get_tree().get_root().get_node("World/HUD/GoldText").text = str(_Get_Gold())
+
+
+func _Spawn_Blood(var position):
+	var particle = deathParticle.instance()
+	particle.position = position
+	get_tree().get_root().get_node("World").add_child(particle)
+	pass
+
+func _Spawn_Loot_Sprayer(var position):
+	var sprayer = lootSprayer.instance()
+	sprayer.position = Vector2(position.x, position.y - 50)
+	get_tree().get_root().get_node("World").add_child(sprayer)
+
+func _Spawn_Gold_Particle(var position):
+	var particle = goldParticle.instance()
+	particle.position = position
+	get_tree().get_root().get_node("World").add_child(particle)

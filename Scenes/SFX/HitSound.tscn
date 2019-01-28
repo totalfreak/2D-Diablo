@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Sounds/Hit_Hurt.wav" type="AudioStream" id=1]
+
+[sub_resource type="AudioStreamRandomPitch" id=9]
+
+audio_stream = ExtResource( 1 )
+random_pitch = 1.86
+
+[node name="HitSound" type="AudioStreamPlayer"]
+
+stream = SubResource( 9 )
+volume_db = -13.43
+pitch_scale = 0.4
+autoplay = false
+mix_target = 0
+bus = "Master"
+_sections_unfolded = [ "Pause" ]
+
+

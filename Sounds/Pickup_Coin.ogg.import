@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Pickup_Coin.ogg-587ebeb4848681326ae1e34583e3039d.oggstr"
+
+[deps]
+
+source_file="res://Sounds/Pickup_Coin.ogg"
+dest_files=[ "res://.import/Pickup_Coin.ogg-587ebeb4848681326ae1e34583e3039d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

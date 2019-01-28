@@ -1,19 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/SFX/HitSound.tscn" type="PackedScene" id=3]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "Run",
+"name": "Idle",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "Idle",
+"name": "Run",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 2 ) ],
@@ -32,7 +33,7 @@ animations = [ {
 custom_solver_bias = 0.0
 extents = Vector2( 32, 32 )
 
-[node name="Enemy" type="KinematicBody2D" index="0" groups=[
+[node name="Enemy" type="KinematicBody2D" groups=[
 "Enemy",
 ]]
 
@@ -45,6 +46,7 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform", "Z Index" ]
 moveSpeed = 50
 health = 10.0
+damage = 5
 followRange = 350
 attackRange = 50
 
@@ -131,6 +133,7 @@ autostart = false
 
 [node name="Bars" type="Control" parent="." index="10"]
 
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.0
 anchor_right = 0.5
@@ -202,6 +205,12 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect" ]
+
+[node name="DeathSprayPosition" type="Position2D" parent="." index="11"]
+
+position = Vector2( 0, 32 )
+
+[node name="HitSound" parent="." index="12" instance=ExtResource( 3 )]
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
 

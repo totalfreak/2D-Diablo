@@ -179,6 +179,7 @@ func _Get_Attacked(var damage):
 		text.get_node("Control/Text").text = str(damage)
 		text.get_node("AnimationPlayer").current_animation = "Appear"
 		add_child(text)
+		$HitSound.play()
 		if health <= 0 and not dead:
 			_Die()
 		Globals._Set_Health(health)

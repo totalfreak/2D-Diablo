@@ -178,7 +178,7 @@ func _Get_Attacked(var damage):
 		text.get_node("Control/Text").text = str(damage)
 		text.get_node("AnimationPlayer").play("Appear")
 		add_child(text)
-		
+		$HitSound.play()
 		if health <= 0 and not dead:
 			_Die()
 		
@@ -196,6 +196,6 @@ func _Die():
 	print("Died")
 	dead = true
 	$CollisionShape2D.disabled = true
-	var particle = deathParticle.instance()
-	add_child(particle)
+	Globals._Spawn_Blood($DeathSprayPosition.get_global_position())
+	Globals._Spawn_Loot_Sprayer($DeathSprayPosition.get_global_position())
 	pass
