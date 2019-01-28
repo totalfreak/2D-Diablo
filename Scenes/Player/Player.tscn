@@ -326,7 +326,7 @@ zoom = Vector2( 0.9, 0.9 )
 limit_left = -1000000
 limit_top = -1000000
 limit_right = 1000000
-limit_bottom = 1000000
+limit_bottom = 800
 limit_smoothed = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
@@ -345,6 +345,7 @@ _sections_unfolded = [ "Limit", "Smoothing", "Z Index" ]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="4"]
 
+editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -362,36 +363,41 @@ _sections_unfolded = [ "Scroll" ]
 
 modulate = Color( 1, 0.716339, 0.441406, 1 )
 
-[node name="AttackTimer" type="Timer" parent="." index="5"]
+[node name="Timers" type="Node2D" parent="." index="5"]
+
+editor/display_folded = true
+
+[node name="AttackTimer" type="Timer" parent="Timers" index="0"]
 
 process_mode = 0
 wait_time = 0.6
 one_shot = true
 autostart = false
 
-[node name="TakeDamageTimer" type="Timer" parent="." index="6"]
+[node name="TakeDamageTimer" type="Timer" parent="Timers" index="1"]
 
 process_mode = 0
 wait_time = 0.3
 one_shot = false
 autostart = false
 
-[node name="DodgeTimer" type="Timer" parent="." index="7"]
+[node name="DodgeTimer" type="Timer" parent="Timers" index="2"]
 
 process_mode = 0
 wait_time = 0.2
 one_shot = false
 autostart = false
 
-[node name="DodgeCooldownTimer" type="Timer" parent="." index="8"]
+[node name="DodgeCooldownTimer" type="Timer" parent="Timers" index="3"]
 
 process_mode = 0
 wait_time = 0.5
 one_shot = false
 autostart = false
 
-[node name="WeaponContainer" type="Node2D" parent="." index="9"]
+[node name="WeaponContainer" type="Node2D" parent="." index="6"]
 
+editor/display_folded = true
 scale = Vector2( 0.65, 0.65 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
@@ -403,13 +409,23 @@ position = Vector2( -8, 24 )
 
 position = Vector2( 0, -21 )
 
-[node name="DodgeParticleContainer" type="Node2D" parent="." index="10"]
+[node name="DodgeParticleContainer" type="Node2D" parent="." index="7"]
 
+editor/display_folded = true
 _sections_unfolded = [ "Transform" ]
 
 [node name="DodgeParticlePoint" type="Position2D" parent="DodgeParticleContainer" index="0"]
 
 position = Vector2( -4, 15 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="JumpParticleContainer" type="Node2D" parent="." index="8"]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="JumpParticlePoint" type="Position2D" parent="JumpParticleContainer" index="0"]
+
+position = Vector2( 0, 19 )
 _sections_unfolded = [ "Transform" ]
 
 

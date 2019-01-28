@@ -6,21 +6,24 @@ var direction = Vector2(1,0)
 var health
 var maxHealth
 var dead = false
+var jumpCount = 0
 const GRAVITY = 20
 const UP_VECTOR = Vector2(0, -1)
 export var moveSpeed = 300
 export var jumpSpeed = 550
 export var dampSpeed = 20
 
+
 var hasWon = false
 var attacking = false
 onready var damageText = preload("res://Scenes/UI/DamageText.tscn")
-onready var attackTimer = get_node("AttackTimer")
-onready var takeDamageTimer = get_node("TakeDamageTimer")
-onready var dodgeTimer = get_node("DodgeTimer")
-onready var dodgeCooldownTimer = get_node("DodgeCooldownTimer")
+onready var attackTimer = get_node("Timers/AttackTimer")
+onready var takeDamageTimer = get_node("Timers/TakeDamageTimer")
+onready var dodgeTimer = get_node("Timers/DodgeTimer")
+onready var dodgeCooldownTimer = get_node("Timers/DodgeCooldownTimer")
 onready var deathParticle = preload("res://Scenes/FX/DeathParticles.tscn")
 onready var dodgeParticle = preload("res://Scenes/FX/DodgeDustParticle.tscn")
+onready var jumpParticle = preload("res://Scenes/FX/JumpDustParticle.tscn")
 onready var weaponContainer = get_node("WeaponContainer")
 onready var player = get_node(".")
 var takingDamage = false
@@ -63,8 +66,14 @@ func _physics_process(delta):
 		$Sprite.play("Won")
 	
 	#Jumping when on floor
-	if not dead and not hasWon and not takingDamage and is_on_floor() and Input.is_action_just_pressed("ui_accept"):
-		motion.y = -jumpSpeed
+	if not dead and not hasWon and not takingDamage and (is_on_floor() or jumpCount < 1) and Input.is_action_just_pressed("ui_accept") :
+		_Jump()
+		
+	
+	#Reset jump counter when on ground
+	if is_on_floor():
+		jumpCount = 0
+	
 	#Setting motion vector and moving
 	motion = move_and_slide(motion, UP_VECTOR)
 
@@ -126,6 +135,12 @@ func _Move(var delta, var dir):
 	elif dir == "right":
 		motion.x = lerp(motion.x, moveSpeed, dampSpeed * delta)
 
+func _Jump():
+	motion.y = -jumpSpeed
+	jumpCount+=1
+	var particle = jumpParticle.instance()
+	$JumpParticleContainer/JumpParticlePoint.add_child(particle)
+
 func _Dodge(var delta):
 	dodging = true
 	player.set_collision_layer_bit(1, true)
@@ -137,6 +152,8 @@ func _Dodge(var delta):
 	var particle = dodgeParticle.instance()
 	$DodgeParticleContainer/DodgeParticlePoint.add_child(particle)
 	dodgeTimer.start()
+	if not is_on_floor():
+		motion.y = -moveSpeed * 1.25
 	if direction.x == -1:
 		motion.x = -moveSpeed * 2
 	elif direction.x == 1:
