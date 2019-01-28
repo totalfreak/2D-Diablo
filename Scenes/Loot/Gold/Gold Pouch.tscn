@@ -11,7 +11,7 @@ radius = 14.0
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 20, 20 )
+extents = Vector2( 25, 25 )
 
 [node name="Gold Pouch" type="Node2D" groups=[
 "Gold",
@@ -28,14 +28,14 @@ collision_mask = 524288
 mode = 0
 mass = 1.0
 friction = 1.0
-bounce = 0.0
+bounce = 0.5
 gravity_scale = 1.0
 custom_integrator = false
-continuous_cd = 0
+continuous_cd = 2
 contacts_reported = 0
 contact_monitor = false
 sleeping = false
-can_sleep = true
+can_sleep = false
 linear_velocity = Vector2( 0, 0 )
 linear_damp = -1.0
 angular_velocity = 0.0
@@ -52,7 +52,6 @@ texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="Physics" index="2"]
 
-editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0

@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 export(String, FILE, "*.tscn") var first_level
 

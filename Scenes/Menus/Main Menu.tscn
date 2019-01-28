@@ -1,7 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Menus/Main Menu.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Enemies/Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/TileMaps/TileMapTemplate.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/UI/Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/UI/HUD.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Loot/Gold/Gold Pouch.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFontData" id=1]
 
@@ -20,7 +26,12 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 default_font = SubResource( 2 )
 
-[node name="Main Menu" type="Control"]
+[node name="World" type="Node2D"]
+
+script = ExtResource( 1 )
+first_level = "res://Scenes/Worlds/HubWorld.tscn"
+
+[node name="Control" type="Control" parent="." index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -34,18 +45,17 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 1 )
-first_level = "res://Scenes/Worlds/World1.tscn"
+_sections_unfolded = [ "Rect" ]
 
-[node name="PlayButton" type="Button" parent="." index="0"]
+[node name="PlayButton" type="Button" parent="Control" index="0"]
 
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -95.0
+margin_left = -100.0
 margin_top = -100.0
-margin_right = 170.0
+margin_right = 165.0
 margin_bottom = -20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -66,15 +76,15 @@ flat = false
 align = 1
 _sections_unfolded = [ "Rect", "Size Flags", "Theme" ]
 
-[node name="QuitButton" type="Button" parent="." index="1"]
+[node name="QuitButton" type="Button" parent="Control" index="1"]
 
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -80.0
+margin_left = -85.0
 margin_top = 70.0
-margin_right = 145.0
+margin_right = 140.0
 margin_bottom = 140.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -95,8 +105,78 @@ flat = false
 align = 1
 _sections_unfolded = [ "Rect", "Size Flags", "Theme" ]
 
-[connection signal="button_up" from="PlayButton" to="." method="_Play"]
+[node name="Enemy" parent="Control" index="2" instance=ExtResource( 3 )]
 
-[connection signal="button_up" from="QuitButton" to="." method="_Quit_Game"]
+position = Vector2( 260, 160 )
+damage = 0
+
+[node name="Enemy2" parent="Control" index="3" instance=ExtResource( 3 )]
+
+position = Vector2( 1010, 350 )
+damage = 0
+
+[node name="Enemy3" parent="Control" index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 980, 610 )
+damage = 0
+
+[node name="TileMap" parent="." index="1" instance=ExtResource( 4 )]
+
+collision_layer = 524291
+collision_mask = 524289
+tile_data = PoolIntArray( -1, 0, 1, -65536, 0, 65536, -65535, 0, 65536, -65534, 0, 65536, -65533, 0, 65536, -65532, 0, 65536, -65531, 0, 65536, -65530, 0, 65536, -65529, 0, 65536, -65528, 0, 65536, -65527, 0, 65536, -65526, 0, 65536, -65525, 0, 65536, -65524, 0, 65536, -65523, 0, 65536, -65522, 0, 65536, -65521, 0, 65536, -65520, 0, 65536, -65519, 0, 65536, -65518, 0, 65536, -65517, 0, 65536, -65516, 0, 2, 65535, 0, 131073, 0, 0, 196619, 1, 0, 3, 2, 0, 131072, 3, 0, 131072, 4, 0, 131072, 5, 0, 131072, 6, 0, 131072, 7, 0, 131072, 8, 0, 131072, 9, 0, 131072, 10, 0, 4, 11, 0, 196619, 12, 0, 196619, 13, 0, 3, 14, 0, 131072, 15, 0, 131072, 16, 0, 131072, 17, 0, 131072, 18, 0, 4, 19, 0, 196619, 20, 0, 131074, 131071, 0, 131073, 65536, 0, 196619, 65537, 0, 131074, 65546, 0, 65537, 65547, 0, 4, 65548, 0, 3, 65549, 0, 65538, 65554, 0, 65537, 65555, 0, 4, 65556, 0, 131074, 196607, 0, 131073, 131072, 0, 196619, 131073, 0, 131074, 131083, 0, 65537, 131084, 0, 65538, 131091, 0, 131073, 131092, 0, 131074, 262143, 0, 131073, 196608, 0, 196619, 196609, 0, 196615, 196610, 0, 196609, 196611, 0, 196609, 196612, 0, 196609, 196613, 0, 196610, 196627, 0, 131073, 196628, 0, 131074, 327679, 0, 131073, 262144, 0, 3, 262145, 0, 65538, 262161, 2, 0, 262163, 0, 131073, 262164, 0, 131074, 393215, 0, 131073, 327680, 0, 131074, 327697, 4, 0, 327699, 0, 131073, 327700, 0, 131074, 458751, 0, 131073, 393216, 0, 131074, 393231, 0, 196608, 393232, 0, 196609, 393233, 0, 196609, 393234, 0, 10, 393235, 0, 65540, 393236, 0, 131074, 524287, 0, 131073, 458752, 0, 131074, 458769, 4, 0, 458770, 0, 131073, 458771, 0, 196619, 458772, 0, 131074, 589823, 0, 131073, 524288, 0, 65539, 524289, 0, 2, 524301, 0, 5, 524305, 4, 0, 524306, 0, 131073, 524307, 0, 196619, 524308, 0, 131074, 655359, 0, 131073, 589824, 0, 196619, 589825, 0, 65539, 589826, 0, 2, 589827, 2, 0, 589828, 2, 0, 589830, 0, 1, 589831, 0, 65536, 589832, 0, 2, 589835, 2, 0, 589836, 0, 1, 589837, 0, 11, 589842, 0, 131073, 589843, 0, 196619, 589844, 0, 131074, 720893, 0, 6, 720894, 0, 196609, 720895, 0, 196614, 655360, 0, 196619, 655361, 0, 196619, 655362, 0, 65539, 655363, 0, 65536, 655364, 0, 65536, 655365, 0, 65536, 655366, 0, 65540, 655367, 0, 196619, 655368, 0, 65539, 655369, 0, 65536, 655370, 0, 65536, 655371, 0, 65536, 655372, 0, 65540, 655373, 0, 65539, 655374, 0, 65536, 655375, 0, 65536, 655376, 0, 65536, 655377, 0, 65536, 655378, 0, 65540, 655379, 0, 196619, 655380, 0, 131074, 786429, 0, 65541, 786431, 0, 65546, 720896, 0, 131072, 720897, 0, 131072, 720898, 0, 131072, 720899, 0, 131072, 720900, 0, 131072, 720901, 0, 131072, 720902, 0, 131072, 720903, 0, 131072, 720904, 0, 131072, 720905, 0, 131072, 720906, 0, 131072, 720907, 0, 131072, 720908, 0, 131072, 720909, 0, 131072, 720910, 0, 131072, 720911, 0, 131072, 720912, 0, 131072, 720913, 0, 131072, 720914, 0, 131072, 720915, 0, 131072, 720916, 0, 65538, 851965, 0, 65542, 851966, 0, 196609, 851967, 0, 65543 )
+
+[node name="Background" parent="." index="2" instance=ExtResource( 5 )]
+
+[node name="Player" parent="." index="3" instance=ExtResource( 6 )]
+
+editor/display_folded = true
+position = Vector2( -100, 740 )
+
+[node name="Camera2D" parent="Player" index="3"]
+
+current = false
+
+[node name="HUD" parent="." index="4" instance=ExtResource( 7 )]
+
+editor/display_folded = true
+
+[node name="HealthBarBG" parent="HUD" index="0"]
+
+visible = false
+
+[node name="HealthBar" parent="HUD" index="1"]
+
+visible = false
+
+[node name="HealthText" parent="HUD" index="2"]
+
+visible = false
+
+[node name="GoldText" parent="HUD" index="3"]
+
+visible = false
+
+[node name="GoldSprite" parent="HUD" index="5"]
+
+visible = false
+
+[node name="Gold Pouch" parent="." index="5" instance=ExtResource( 8 )]
+
+position = Vector2( 420, 540 )
+
+[node name="Gold Pouch2" parent="." index="6" instance=ExtResource( 8 )]
+
+position = Vector2( 860, 480 )
+
+[node name="Gold Pouch3" parent="." index="7" instance=ExtResource( 8 )]
+
+position = Vector2( 160, 540 )
+
+[connection signal="pressed" from="Control/PlayButton" to="." method="_Play"]
+
+[connection signal="pressed" from="Control/QuitButton" to="." method="_Quit_Game"]
 
 
+[editable path="Player"]
+[editable path="HUD"]

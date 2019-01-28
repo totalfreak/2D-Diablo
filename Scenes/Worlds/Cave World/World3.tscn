@@ -42,24 +42,28 @@ position = Vector2( -200, 848 )
 [node name="Portal" parent="." index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 1384, 480 )
-world_scene = "res://Scenes/Worlds/World1.tscn"
+world_scene = "res://Scenes/Worlds/HubWorld.tscn"
 teleportDelay = 1.5
 
 [node name="Enemy" parent="." index="3" instance=ExtResource( 4 )]
 
 position = Vector2( 696, 416 )
+damage = 5
 
 [node name="Enemy2" parent="." index="4" instance=ExtResource( 4 )]
 
 position = Vector2( 1336, 864 )
+damage = 5
 
 [node name="Enemy3" parent="." index="5" instance=ExtResource( 4 )]
 
 position = Vector2( 1088, 224 )
+damage = 5
 
 [node name="Enemy4" parent="." index="6" instance=ExtResource( 4 )]
 
 position = Vector2( 64, 24 )
+damage = 5
 
 [node name="HUD" parent="." index="7" instance=ExtResource( 5 )]
 

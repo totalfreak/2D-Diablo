@@ -3,7 +3,7 @@ extends KinematicBody2D
 export var moveSpeed = 100
 export var health = 10.0
 onready var ogHealth = health
-var damage = 5
+export var damage = 5
 onready var leftSurfaceRay = get_node("surfaceRayLeft")
 onready var rightSurfaceRay = get_node("surfaceRayRight")
 onready var leftPlayerRay = get_node("playerRayLeft")
@@ -40,17 +40,12 @@ func _ready():
 	rightSurfaceRay.add_exception(get_tree().get_nodes_in_group("Player")[0])
 	leftPlayerRay.add_exception(get_tree().get_nodes_in_group("Solids")[0])
 	rightPlayerRay.add_exception(get_tree().get_nodes_in_group("Solids")[0])
-	leftSurfaceRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
-	rightSurfaceRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
-	leftPlayerRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
-	playerRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
 	randomize()
 	playerRayLine.default_color = Color(rand_range(0.0, 1.0), rand_range(0.0, 1.0), rand_range(0.0, 1.0), 0.5)
 	self.remove_child(playerRayLine)
 	self.remove_child(playerRay)
 	get_tree().get_root().get_node("World").call_deferred("add_child", playerRay)
 	get_tree().get_root().get_node("World").call_deferred("add_child", playerRayLine)
-	rightPlayerRay.add_exception(get_tree().get_nodes_in_group("Loot")[0])
 	takeDamageTimer.connect("timeout", self, "_Stop_Taking_Damage")
 	pass
 

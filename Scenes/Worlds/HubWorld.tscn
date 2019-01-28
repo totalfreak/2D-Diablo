@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/UI/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Interactives/HubPortal.tscn" type="PackedScene" id=4]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" index="0"]
 
 [node name="TileMap" parent="." index="0" instance=ExtResource( 1 )]
 
@@ -22,5 +22,39 @@ editor/display_folded = true
 [node name="HubPortal" parent="." index="3" instance=ExtResource( 4 )]
 
 world_scene = "res://Scenes/Worlds/Cave World/World1.tscn"
+
+[node name="HubPortal2" parent="." index="4" instance=ExtResource( 4 )]
+
+position = Vector2( 832, 280 )
+world_scene = "res://Scenes/Worlds/Cave World/World1.tscn"
+textColour = Color( 0.485229, 0.812052, 0.828125, 1 )
+portalColour = Color( 0.420349, 0.757812, 0.749903, 1 )
+worldText = "Ice World"
+
+[node name="HubPortal3" parent="." index="5" instance=ExtResource( 4 )]
+
+position = Vector2( 1120, 408 )
+world_scene = "res://Scenes/Worlds/Cave World/World1.tscn"
+textColour = Color( 0.824219, 0.366331, 0.032196, 1 )
+portalColour = Color( 0.878906, 0.321651, 0.151062, 1 )
+worldText = "Fire World"
+
+[node name="HubPortal4" parent="." index="6" instance=ExtResource( 4 )]
+
+position = Vector2( 2080, 408 )
+world_scene = "res://Scenes/Worlds/Cave World/World1.tscn"
+active = false
+textColour = Color( 0.419838, 0.796875, 0.161865, 1 )
+portalColour = Color( 0.243965, 0.667969, 0.125244, 1 )
+worldText = "Grass World"
+
+[node name="HubPortal5" parent="." index="7" instance=ExtResource( 4 )]
+
+position = Vector2( 2408, 280 )
+world_scene = "res://Scenes/Worlds/Cave World/World1.tscn"
+active = false
+textColour = Color( 0.255249, 0.387722, 0.640625, 1 )
+portalColour = Color( 0.164642, 0.172202, 0.648438, 1 )
+worldText = "Water World"
 
 
