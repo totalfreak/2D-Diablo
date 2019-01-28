@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/TileMaps/TileMapTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/UI/HUD.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Interactives/Portal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Interactives/HubPortal.tscn" type="PackedScene" id=4]
 
 [node name="World" type="Node2D"]
 
@@ -19,9 +19,8 @@ position = Vector2( 104, 592 )
 
 editor/display_folded = true
 
-[node name="Portal" parent="." index="3" instance=ExtResource( 4 )]
+[node name="HubPortal" parent="." index="3" instance=ExtResource( 4 )]
 
-position = Vector2( 544, 408 )
-world_scene = "res://Scenes/Worlds/World1.tscn"
+world_scene = "res://Scenes/Worlds/Cave World/World1.tscn"
 
 

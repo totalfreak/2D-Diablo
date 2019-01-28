@@ -7,7 +7,7 @@ var health
 var maxHealth
 var dead = false
 var jumpCount = 0
-const GRAVITY = 20
+
 const UP_VECTOR = Vector2(0, -1)
 export var moveSpeed = 300
 export var jumpSpeed = 550
@@ -39,7 +39,7 @@ func _ready():
 	if not Globals._Get_Max_Health():
 		Globals._Set_Max_Health(health)
 	maxHealth = Globals._Get_Max_Health()
-	Globals._Update_Health_UI()
+	Globals._Initialize_UI()
 	takeDamageTimer.connect("timeout", self, "_Stop_Taking_Damage")
 	attackTimer.connect("timeout", self, "_Stop_Attacking")
 	dodgeTimer.connect("timeout", self, "_Stop_Dodging")
@@ -54,7 +54,7 @@ func _input(event):
 
 func _physics_process(delta):
 	#Subtracting gravity
-	motion.y += GRAVITY
+	motion.y += Globals.GRAVITY
 	
 	
 	if not hasWon and not dead and not takingDamage and not dodging:

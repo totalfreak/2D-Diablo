@@ -55,6 +55,9 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	
+	motion.y += Globals.GRAVITY
+	
 	#Save status of rays
 	rayBools[0] = leftSurfaceRay.is_colliding()
 	rayBools[1] = rightSurfaceRay.is_colliding()

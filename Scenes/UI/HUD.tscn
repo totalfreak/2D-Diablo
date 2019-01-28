@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/UI/Background.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Fonts/FFFFORWARD.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://Scenes/UI/Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/Loot/Gold/Gold Pouch.png" type="Texture" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 14
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 1 )
+_sections_unfolded = [ "Font", "Settings" ]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -72,10 +82,44 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect", "Size Flags" ]
 
-[node name="Background" parent="." index="3" instance=ExtResource( 1 )]
+[node name="GoldText" type="Label" parent="." index="3"]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1190.0
+margin_top = 660.0
+margin_right = 1280.0
+margin_bottom = 680.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+size_flags_stretch_ratio = 2.49
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0.960938, 0, 1 )
+text = "0"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "Size Flags", "custom_fonts" ]
+
+[node name="Background" parent="." index="4" instance=ExtResource( 2 )]
+
+visible = false
 modulate = Color( 0.832031, 0.832031, 0.832031, 1 )
 position = Vector2( 0, 630 )
 scale = Vector2( 1, 0.125 )
+
+[node name="GoldSprite" type="Sprite" parent="." index="5"]
+
+position = Vector2( 1159, 664 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
 
 

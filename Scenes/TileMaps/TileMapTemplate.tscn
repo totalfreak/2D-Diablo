@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/TileSets/GrassAutoTileSet.tres" type="TileSet" id=1]
 
-[node name="TileMap" type="TileMap" groups=[
+[node name="TileMap" type="TileMap" index="0" groups=[
 "Solids",
 ]]
 
