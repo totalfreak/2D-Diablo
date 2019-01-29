@@ -1,26 +1,29 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger15.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger16.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger17.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger18.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger3.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger11.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger12.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger13.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger9.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger10.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger5.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger6.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger7.png" type="Texture" id=14]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger8.png" type="Texture" id=15]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger14.png" type="Texture" id=16]
-[ext_resource path="res://Scenes/UI/Background.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Weapons/Swords/Sword.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Scenes/SFX/HitSound.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Sounds/Pickup_Coin.wav" type="AudioStream" id=20]
-[ext_resource path="res://Sprites/Lights/spot.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/Player/Guy/Guy1.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player/Guy/Guy2.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/Guy/Guy3.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/Guy/Guy4.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/Guy/Guy5.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/Guy/Guy6.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Player/Guy/Guy7.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Player/Guy/Guy8.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Player/Guy/Guy19.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Player/Guy/Guy16.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Player/Guy/Guy17.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Player/Guy/Guy18.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Player/Guy/Guy13.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Player/Guy/Guy14.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Player/Guy/Guy15.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Player/Guy/Guy9.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Player/Guy/Guy10.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/Player/Guy/Guy11.png" type="Texture" id=19]
+[ext_resource path="res://Scenes/UI/Background.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Weapons/Swords/Sword.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/SFX/HitSound.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Sounds/Pickup_Coin.wav" type="AudioStream" id=23]
+[ext_resource path="res://Sprites/Lights/spot.png" type="Texture" id=24]
 
 [sub_resource type="Animation" id=1]
 
@@ -226,67 +229,67 @@ custom_solver_bias = 0.0
 radius = 10.0
 height = 10.0
 
-[sub_resource type="CanvasItemMaterial" id=11]
+[sub_resource type="CanvasItemMaterial" id=8]
 
 render_priority = 0
 blend_mode = 0
 light_mode = 1
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=9]
 
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "Run",
-"speed": 5.0
+"speed": 10.0
 }, {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 3.0
 }, {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": false,
 "name": "Attack",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
 "name": "Get_Hit",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 12 ), ExtResource( 13 ) ],
+"frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": false,
 "name": "Jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 14 ) ],
+"frames": [ ExtResource( 19 ) ],
 "loop": true,
 "name": "Fall",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 17 ) ],
 "loop": true,
 "name": "Won",
 "speed": 3.0
 }, {
-"frames": [ ExtResource( 16 ) ],
+"frames": [ ExtResource( 18 ) ],
 "loop": true,
 "name": "Dodge",
 "speed": 5.0
 } ]
 
-[sub_resource type="AudioStreamRandomPitch" id=9]
+[sub_resource type="AudioStreamRandomPitch" id=10]
 
-audio_stream = ExtResource( 20 )
+audio_stream = ExtResource( 23 )
 random_pitch = 1.2
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id=11]
 
 custom_solver_bias = 0.0
 radius = 5.0
 
-[node name="Player" type="KinematicBody2D" index="0" groups=[
+[node name="Player" type="KinematicBody2D" groups=[
 "Player",
 ]]
 
@@ -323,17 +326,16 @@ _sections_unfolded = [ "Playback Options" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( 0, 5 )
+position = Vector2( 0, 3 )
 shape = SubResource( 7 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="AnimatedSprite" parent="." index="2"]
 
-material = SubResource( 11 )
+material = SubResource( 8 )
 scale = Vector2( 1.25, 1.25 )
-frames = SubResource( 8 )
-animation = "Won"
-frame = 3
+frames = SubResource( 9 )
+animation = "Idle"
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
 [node name="Camera2D" type="Camera2D" parent="." index="3"]
@@ -378,7 +380,7 @@ scroll_limit_end = Vector2( 0, 0 )
 scroll_ignore_camera_zoom = false
 _sections_unfolded = [ "Scroll" ]
 
-[node name="Background" parent="ParallaxBackground" index="0" instance=ExtResource( 17 )]
+[node name="Background" parent="ParallaxBackground" index="0" instance=ExtResource( 20 )]
 
 modulate = Color( 0.75, 0.75, 0.75, 1 )
 
@@ -424,8 +426,9 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 
 position = Vector2( -8, 24 )
 
-[node name="Sword" parent="WeaponContainer/WeaponPoint" index="0" instance=ExtResource( 18 )]
+[node name="Sword" parent="WeaponContainer/WeaponPoint" index="0" instance=ExtResource( 21 )]
 
+visible = false
 position = Vector2( 0, -21 )
 
 [node name="DodgeParticleContainer" type="Node2D" parent="." index="7"]
@@ -435,7 +438,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="DodgeParticlePoint" type="Position2D" parent="DodgeParticleContainer" index="0"]
 
-position = Vector2( -4, 15 )
+position = Vector2( -5, 15 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="JumpParticleContainer" type="Node2D" parent="." index="8"]
@@ -445,14 +448,14 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="JumpParticlePoint" type="Position2D" parent="JumpParticleContainer" index="0"]
 
-position = Vector2( 0, 19 )
+position = Vector2( 0, 17 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="HitSound" parent="." index="9" instance=ExtResource( 19 )]
+[node name="HitSound" parent="." index="9" instance=ExtResource( 22 )]
 
 [node name="GoldSound" type="AudioStreamPlayer" parent="." index="10"]
 
-stream = SubResource( 9 )
+stream = SubResource( 10 )
 volume_db = -13.43
 pitch_scale = 1.1
 autoplay = false
@@ -478,7 +481,7 @@ _sections_unfolded = [ "Audio Bus", "Collision" ]
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LedgeDetection/Area2D" index="0"]
 
 position = Vector2( 16, -17 )
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 
 [node name="Torch" type="Node2D" parent="." index="12"]
 
@@ -486,9 +489,9 @@ shape = SubResource( 10 )
 
 enabled = true
 editor_only = false
-texture = ExtResource( 21 )
+texture = ExtResource( 24 )
 offset = Vector2( 0, 0 )
-texture_scale = 5.0
+texture_scale = 3.0
 color = Color( 0.8125, 0.618103, 0.101562, 1 )
 energy = 1.0
 mode = 0
@@ -498,7 +501,7 @@ range_z_max = 1024
 range_layer_min = 0
 range_layer_max = 0
 range_item_cull_mask = 1
-shadow_enabled = true
+shadow_enabled = false
 shadow_color = Color( 0, 0, 0, 0.745843 )
 shadow_buffer_size = 2048
 shadow_gradient_length = 5.0

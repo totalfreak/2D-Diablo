@@ -156,6 +156,7 @@ func _Jump():
 
 func _Dodge(var delta):
 	dodging = true
+	grabbedLedge = false
 	player.set_collision_layer_bit(1, true)
 	player.set_collision_layer_bit(0, false)
 	player.set_collision_mask_bit(1, true)
