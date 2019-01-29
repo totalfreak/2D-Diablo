@@ -30,6 +30,7 @@ var takingDamage = false
 var dodging = false
 var canDodge = true
 var knockbacked = false
+var grabbedLedge = false
 export var knockbackDelay = 0.5
 
 func _ready():
@@ -54,7 +55,8 @@ func _input(event):
 
 func _physics_process(delta):
 	#Subtracting gravity
-	motion.y += Globals.GRAVITY
+	if not grabbedLedge:
+		motion.y += Globals.GRAVITY
 	
 	
 	if not hasWon and not dead and not takingDamage and not dodging:
@@ -66,13 +68,22 @@ func _physics_process(delta):
 		$Sprite.play("Won")
 	
 	#Jumping when on floor
-	if not dead and not hasWon and not takingDamage and (is_on_floor() or jumpCount < 1) and Input.is_action_just_pressed("ui_accept") :
+	if not dead and not hasWon and not takingDamage and (is_on_floor() or jumpCount < 1) and Input.is_action_just_pressed("ui_accept"):
 		_Jump()
 		
 	
 	#Reset jump counter when on ground
 	if is_on_floor():
+		print("")
 		jumpCount = 0
+	
+	if grabbedLedge:
+		motion = Vector2(0,0)
+		if Input.is_action_just_pressed("ui_accept"):
+			grabbedLedge = false
+			_Jump()
+		elif Input.is_action_just_pressed("dodge"):
+			_Dodge(delta)
 	
 	#Setting motion vector and moving
 	motion = move_and_slide(motion, UP_VECTOR)
@@ -85,6 +96,7 @@ func _Process_Input(var delta):
 		$Sprite.flip_h = false
 		$DodgeParticleContainer.scale.x = 1
 		$WeaponContainer.scale.x = 1
+		$LedgeDetection.scale.x = 1
 		# If on floor, play run anim else do either fall or jump anim
 		_Move(delta, "right")
 	elif Input.is_action_pressed("ui_left"):
@@ -92,6 +104,7 @@ func _Process_Input(var delta):
 		$Sprite.flip_h = true
 		$WeaponContainer.scale.x = -1
 		$DodgeParticleContainer.scale.x = -1
+		$LedgeDetection.scale.x = -1
 		# If on floor, play run anim else do either fall or jump anim
 		_Move(delta, "left")
 	elif not is_on_floor():
@@ -183,6 +196,19 @@ func _Get_Attacked(var damage):
 		if health <= 0 and not dead:
 			_Die()
 		Globals._Set_Health(health)
+
+func _Hit_Ledge(var body):
+	if not is_on_floor() and is_on_wall() and not grabbedLedge:
+		print($LedgeDetection/Area2D.get_overlapping_areas())
+		grabbedLedge = true
+		print("Got Ledge")
+	pass
+
+func _Lose_Ledge(var body):
+	if not is_on_wall() and grabbedLedge:
+		grabbedLedge = false
+		print("Lost Ledge")
+	pass
 
 func _Stop_Dodging():
 	dodging = false

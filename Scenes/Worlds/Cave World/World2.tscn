@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/TileSets/GrassAutoTileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Scenes/Enemies/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/UI/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Loot/Gold/Gold Pouch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/FX/SceneDarkener.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/FX/Torch.tscn" type="PackedScene" id=8]
 
 [node name="World" type="Node2D"]
 
@@ -66,5 +68,19 @@ position = Vector2( 1128, 288 )
 [node name="Gold Pouch3" parent="." index="8" instance=ExtResource( 6 )]
 
 position = Vector2( 1072, 288 )
+
+[node name="CanvasModulate" parent="." index="9" instance=ExtResource( 7 )]
+
+[node name="Torch" parent="." index="10" instance=ExtResource( 8 )]
+
+position = Vector2( 416, 544 )
+
+[node name="Torch2" parent="." index="11" instance=ExtResource( 8 )]
+
+position = Vector2( 736, 544 )
+
+[node name="Torch3" parent="." index="12" instance=ExtResource( 8 )]
+
+position = Vector2( 1200, 224 )
 
 

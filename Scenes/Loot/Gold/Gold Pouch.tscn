@@ -1,14 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Loot/Gold/Gold Pouch.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Loot/Gold/Gold Pouch.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 14.0
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="OccluderPolygon2D" id=2]
+
+closed = true
+cull_mode = 0
+polygon = PoolVector2Array( -10.6667, 0, 0, -10.6667, 10.6667, -10.6667, 10.6667, 0, 10.6667, 10.6667, 0, 10.6667, -10.6667, 10.6667 )
+
+[sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
 extents = Vector2( 25, 25 )
@@ -46,11 +52,16 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="Physics" index="0"]
 
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Physics" index="1"]
 
 texture = ExtResource( 2 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Physics/Sprite" index="0"]
+
+occluder = SubResource( 2 )
+light_mask = 1
 
 [node name="Area2D" type="Area2D" parent="Physics" index="2"]
 
@@ -67,7 +78,7 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Physics/Area2D" index="0"]
 
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [connection signal="body_entered" from="Physics/Area2D" to="." method="_on_Area2D_body_entered"]
 

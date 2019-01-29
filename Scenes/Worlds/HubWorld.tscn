@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/TileMaps/TileMapTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/UI/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Interactives/HubPortal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/FX/Torch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/FX/SceneDarkener.tscn" type="PackedScene" id=6]
 
 [node name="World" type="Node2D"]
 
@@ -56,5 +58,11 @@ active = false
 textColour = Color( 0.255249, 0.387722, 0.640625, 1 )
 portalColour = Color( 0.164642, 0.172202, 0.648438, 1 )
 worldText = "Water World"
+
+[node name="Torch" parent="." index="8" instance=ExtResource( 5 )]
+
+position = Vector2( 1504, 608 )
+
+[node name="CanvasModulate" parent="." index="9" instance=ExtResource( 6 )]
 
 

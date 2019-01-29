@@ -1,18 +1,18 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger3.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger15.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger16.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger17.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger18.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger15.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger16.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger17.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger18.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger3.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Player/Ranger/Ranger11.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Player/Ranger/Ranger12.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Player/Ranger/Ranger13.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger5.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger6.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger9.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Player/Ranger/Ranger10.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger9.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger10.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger5.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Player/Ranger/Ranger6.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/Player/Ranger/Ranger7.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/Player/Ranger/Ranger8.png" type="Texture" id=15]
 [ext_resource path="res://Sprites/Player/Ranger/Ranger14.png" type="Texture" id=16]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Scenes/Weapons/Swords/Sword.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/SFX/HitSound.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Sounds/Pickup_Coin.wav" type="AudioStream" id=20]
+[ext_resource path="res://Sprites/Lights/spot.png" type="Texture" id=21]
 
 [sub_resource type="Animation" id=1]
 
@@ -225,32 +226,38 @@ custom_solver_bias = 0.0
 radius = 10.0
 height = 10.0
 
+[sub_resource type="CanvasItemMaterial" id=11]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 1
+
 [sub_resource type="SpriteFrames" id=8]
 
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 3.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "Run",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 3.0
 }, {
 "frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": false,
 "name": "Attack",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ) ],
-"loop": false,
-"name": "Jump",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 12 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "Get_Hit",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": false,
+"name": "Jump",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 14 ) ],
@@ -258,7 +265,7 @@ animations = [ {
 "name": "Fall",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
 "loop": true,
 "name": "Won",
 "speed": 3.0
@@ -273,6 +280,11 @@ animations = [ {
 
 audio_stream = ExtResource( 20 )
 random_pitch = 1.2
+
+[sub_resource type="CircleShape2D" id=10]
+
+custom_solver_bias = 0.0
+radius = 5.0
 
 [node name="Player" type="KinematicBody2D" index="0" groups=[
 "Player",
@@ -317,11 +329,12 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="AnimatedSprite" parent="." index="2"]
 
+material = SubResource( 11 )
 scale = Vector2( 1.25, 1.25 )
 frames = SubResource( 8 )
 animation = "Won"
 frame = 3
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
 [node name="Camera2D" type="Camera2D" parent="." index="3"]
 
@@ -352,7 +365,6 @@ _sections_unfolded = [ "Limit", "Smoothing", "Z Index" ]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="4"]
 
-editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -368,7 +380,7 @@ _sections_unfolded = [ "Scroll" ]
 
 [node name="Background" parent="ParallaxBackground" index="0" instance=ExtResource( 17 )]
 
-modulate = Color( 1, 0.716339, 0.441406, 1 )
+modulate = Color( 0.75, 0.75, 0.75, 1 )
 
 [node name="Timers" type="Node2D" parent="." index="5"]
 
@@ -447,5 +459,56 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 _sections_unfolded = [ "Pause" ]
+
+[node name="LedgeDetection" type="Node2D" parent="." index="11"]
+
+editor/display_folded = true
+
+[node name="Area2D" type="Area2D" parent="LedgeDetection" index="0"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Audio Bus", "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LedgeDetection/Area2D" index="0"]
+
+position = Vector2( 16, -17 )
+shape = SubResource( 10 )
+
+[node name="Torch" type="Node2D" parent="." index="12"]
+
+[node name="Light2D" type="Light2D" parent="Torch" index="0"]
+
+enabled = true
+editor_only = false
+texture = ExtResource( 21 )
+offset = Vector2( 0, 0 )
+texture_scale = 5.0
+color = Color( 0.8125, 0.618103, 0.101562, 1 )
+energy = 1.0
+mode = 0
+range_height = 0.0
+range_z_min = -1024
+range_z_max = 1024
+range_layer_min = 0
+range_layer_max = 0
+range_item_cull_mask = 1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 0.745843 )
+shadow_buffer_size = 2048
+shadow_gradient_length = 5.0
+shadow_filter = 2
+shadow_filter_smooth = 64.0
+shadow_item_cull_mask = 1
+_sections_unfolded = [ "Material", "Range", "Shadow", "Visibility" ]
+
+[connection signal="body_entered" from="LedgeDetection/Area2D" to="." method="_Hit_Ledge"]
+
+[connection signal="body_exited" from="LedgeDetection/Area2D" to="." method="_Lose_Ledge"]
 
 

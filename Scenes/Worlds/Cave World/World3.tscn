@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/TileSets/GrassAutoTileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Scenes/UI/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Loot/Gold/Gold Pouch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Loot/Loot Sprayer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/FX/SceneDarkener.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/FX/Torch.tscn" type="PackedScene" id=9]
 
 [node name="World" type="Node2D"]
 
@@ -43,7 +45,7 @@ position = Vector2( -200, 848 )
 [node name="Portal" parent="." index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 1384, 480 )
-world_scene = "res://Scenes/Worlds/HubWorld.tscn"
+world_scene = "res://Scenes/Worlds/Cave World/World4.tscn"
 teleportDelay = 1.5
 
 [node name="Enemy" parent="." index="3" instance=ExtResource( 4 )]
@@ -105,6 +107,28 @@ position = Vector2( 1248, 864 )
 [node name="Loot Sprayer" parent="." index="17" instance=ExtResource( 7 )]
 
 position = Vector2( -60, 900 )
+
+[node name="CanvasModulate" parent="." index="18" instance=ExtResource( 8 )]
+
+[node name="Torch" parent="." index="19" instance=ExtResource( 9 )]
+
+position = Vector2( 384, 544 )
+
+[node name="Torch2" parent="." index="20" instance=ExtResource( 9 )]
+
+position = Vector2( 64, 672 )
+
+[node name="Torch3" parent="." index="21" instance=ExtResource( 9 )]
+
+position = Vector2( 448, 160 )
+
+[node name="Torch4" parent="." index="22" instance=ExtResource( 9 )]
+
+position = Vector2( 1024, 736 )
+
+[node name="Torch5" parent="." index="23" instance=ExtResource( 9 )]
+
+position = Vector2( 1168, 224 )
 
 
 [editable path="HUD"]
